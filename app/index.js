@@ -1,14 +1,16 @@
-import notes from '../mocknotes'
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import NoteCard from '../components/NoteCard';
 import AddNoteBtn from '../components/AddNoteBtn';
+import useStore from '../hooks/useStore'
 
 export default function Home() {
+  const notes = useStore(state => state.notes); // Fetch notes from the store
+
   return (
     <View style={styles.homePage}>
       <FlatList
         data={notes}
-        numColumns={2} // Display cards in two columns
+        numColumns={2}
         keyExtractor={(note) => note.id}
         renderItem={({ item }) => (
           <NoteCard title={item.title} content={item.content} />

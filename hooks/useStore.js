@@ -3,21 +3,33 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const useStore = create(set => ({
   notes: [],
-  addNote: (note) => set(state => ({ notes: [...state.notes, note] })),
-  // ... other actions like deleteNote, updateNote, etc.
+  noteCounter: 0,
+
+  addNote: (note) => set(state => {
+    const newNoteWithId = { ...note, id: state.noteCounter.toString() };
+    return { 
+      notes: [...state.notes, newNoteWithId],
+      noteCounter: state.noteCounter + 1
+    };
+  }),
   
-  // Load notes from AsyncStorage
   loadNotes: async () => {
     const savedNotes = await AsyncStorage.getItem('notes');
-    if (savedNotes) set({ notes: JSON.parse(savedNotes) });
+    const savedCounter = await AsyncStorage.getItem('noteCounter');
+
+    if (savedNotes) set({ 
+      notes: JSON.parse(savedNotes),
+      noteCounter: savedCounter ? parseInt(savedCounter, 10) : 0
+    });
   },
 
-  // Save notes to AsyncStorage
   saveNotes: async () => {
-    const { notes } = useStore.getState();
+    const { notes, noteCounter } = useStore.getState();
     await AsyncStorage.setItem('notes', JSON.stringify(notes));
+    await AsyncStorage.setItem('noteCounter', noteCounter.toString());
   },
   // ... other states and actions
 }));
 
 export default useStore;
+

@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HomeBtn from "../components/HomeBtn";
 import { router } from "expo-router";
 import useStore from "../hooks/useStore";
-import { v4 as uuidv4 } from "uuid";
 
 export default function NewNotePage() {
   const { addNote, saveNotes } = useStore();
@@ -14,7 +13,6 @@ export default function NewNotePage() {
 
   const handleSaveNote = () => {
     const newNote = {
-      id: uuidv4(),
       title,
       content,
       tags: tags.split(",").map((tag) => tag.trim().toLowerCase()), // Ensures tags are lowercase
