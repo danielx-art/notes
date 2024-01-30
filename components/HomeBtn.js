@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(100,100,100)',
         borderRadius: 5,
         position: 'absolute',
-        bottom: 10,
+        top: 50,
         right: 10,
     },
     BackBtnText: {

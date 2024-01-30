@@ -34,10 +34,6 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingTop: 50,
   },
-  text: {
-    color: 'rgb(141,100,141)',
-    
-  },
   columnWrapper: {
     flex: 1,
     justifyContent: 'space-between',

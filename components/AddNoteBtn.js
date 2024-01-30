@@ -1,15 +1,13 @@
 import { View, Text, StyleSheet } from "react-native"
 import PressableOpacity from "./PressableOpacity"
-import { useRouter } from "expo-router"
+import { router } from "expo-router"
 
 import layoutConfigs from "../layoutConfigs"
 
 export default function AddNoteBtn() {
 
-    const router = useRouter();
-
     return(
-        <PressableOpacity onPress={()=>{router.replace("/newnote")}} style={styles.AddNoteBtn}>
+        <PressableOpacity onPress={()=>{router.navigate("/newnote")}} style={styles.AddNoteBtn}>
             <View style={styles.AddNoteBtnView}>
                 <Text style={styles.AddNoteBtnSymbol}>a</Text>
             </View>
