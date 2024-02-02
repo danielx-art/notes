@@ -28,7 +28,16 @@ const useStore = create(set => ({
     await AsyncStorage.setItem('notes', JSON.stringify(notes));
     await AsyncStorage.setItem('noteCounter', noteCounter.toString());
   },
-  // ... other states and actions
+  
+  updateNote: (updatedNote) => set(state => {
+    const notes = state.notes.map(note => {
+      if (note.id === updatedNote.id) {
+        return updatedNote;
+      }
+      return note;
+    });
+    return { notes };
+  }),
 }));
 
 export default useStore;

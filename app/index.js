@@ -4,7 +4,7 @@ import AddNoteBtn from '../components/AddNoteBtn';
 import useStore from '../hooks/useStore'
 
 export default function Home() {
-  const notes = useStore(state => state.notes); // Fetch notes from the store
+  const notes = useStore(state => state.notes);
 
   return (
     <View style={styles.homePage}>
@@ -13,7 +13,7 @@ export default function Home() {
         numColumns={2}
         keyExtractor={(note) => note.id}
         renderItem={({ item }) => (
-          <NoteCard title={item.title} content={item.content} />
+          <NoteCard id={item.id} />
         )}
         style={styles.flatList}
         columnWrapperStyle={styles.columnWrapper}
