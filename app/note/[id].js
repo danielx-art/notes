@@ -8,7 +8,7 @@ import { useLocalSearchParams } from "expo-router";
 
 export default function NotePage() {
   const { id } = useLocalSearchParams();
-  const { addNote, saveNotes } = useStore();
+  const { updateNote, saveNotes } = useStore();
   const note = useStore((state) => state.notes.find((item) => item.id === id));
   const [title, setTitle] = useState(note?.title || "");
   const [content, setContent] = useState(note?.content || "");
