@@ -7,8 +7,6 @@ export default function NoteCard({ id }) {
 
   if (!note) return;
 
-  console.log(id); //debugg
-
   return (
     <View style={styles.outterCard}>
       <Link
@@ -16,10 +14,14 @@ export default function NoteCard({ id }) {
           pathname: "/note/[id]",
           params: { id: id },
         }}
-        style={styles.card}
+        style={styles.link}
       >
-        <Text style={styles.noteTitle}>{note.title}</Text>
-        <Text style={styles.noteContent}>{note.content.substring(0, 40)}</Text>
+        <View
+          style={styles.innerview}
+        >
+          <Text style={styles.noteTitle} numberOfLines={1} ellipsizeMode="tail">{note.title}</Text>
+          <Text style={styles.noteContent} numberOfLines={2} ellipsizeMode="tail">{note.content}</Text>
+        </View>
       </Link>
     </View>
   );
@@ -31,8 +33,10 @@ const styles = StyleSheet.create({
     width: "50%",
     paddingHorizontal: 4,
     paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: 'green',
   },
-  card: {
+  link: {
     backgroundColor: "rgb(41,42,43)",
     paddingTop: 5,
     paddingRight: 5,
@@ -41,10 +45,20 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 5,
   },
+  innerview: {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: 'red',
+  },
   noteTitle: {
     color: "rgb(225,190,220)",
   },
   noteContent: {
     color: "rgb(160,160,160)",
+    width: "100%",
+    flex: 1,
+    flexShrink: 1,
+    borderWidth: 1,
+    borderColor: 'blue',
   },
 });
