@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
 import useStore from "../hooks/useStore";
 
@@ -11,17 +11,18 @@ export default function NoteCard({ id }) {
     <View style={styles.outterCard}>
       <Link
         href={{
-          pathname: "/note/[id]",
+          pathname: "/note/(tabs)/edit/[id]",
           params: { id: id },
         }}
         style={styles.link}
+        asChild
       >
-        <View
+        <Pressable
           style={styles.innerview}
         >
           <Text style={styles.noteTitle} numberOfLines={1} ellipsizeMode="tail">{note.title}</Text>
           <Text style={styles.noteContent} numberOfLines={2} ellipsizeMode="tail">{note.content}</Text>
-        </View>
+        </Pressable>
       </Link>
     </View>
   );
@@ -33,8 +34,6 @@ const styles = StyleSheet.create({
     width: "50%",
     paddingHorizontal: 4,
     paddingVertical: 4,
-    borderWidth: 1,
-    borderColor: 'green',
   },
   link: {
     backgroundColor: "rgb(41,42,43)",
@@ -47,18 +46,15 @@ const styles = StyleSheet.create({
   },
   innerview: {
     width: "100%",
-    borderWidth: 1,
-    borderColor: 'red',
   },
   noteTitle: {
     color: "rgb(225,190,220)",
+    width: "100%",
+    flexShrink: 1,
   },
   noteContent: {
     color: "rgb(160,160,160)",
     width: "100%",
-    flex: 1,
     flexShrink: 1,
-    borderWidth: 1,
-    borderColor: 'blue',
   },
 });

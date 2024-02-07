@@ -4,25 +4,22 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HomeBtn from "../../components/HomeBtn";
 import { router } from "expo-router";
 import useStore from "../../hooks/useStore";
-import { useLocalSearchParams } from "expo-router";
 
-export default function NotePage() {
-  const { id } = useLocalSearchParams();
-  const { updateNote, saveNotes } = useStore();
-  const note = useStore((state) => state.notes.find((item) => item.id === id));
-  const [title, setTitle] = useState(note?.title || "");
-  const [content, setContent] = useState(note?.content || "");
-  const [tags, setTags] = useState((note?.tags || []).join(", "));
+export default function NewNotePage() {
+  const { addNote, saveNotes } = useStore();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [tags, setTags] = useState("");
 
   const handleSaveNote = () => {
-    const updatedNote = {
-      ...note,
+    const newNote = {
       title,
       content,
-      tags: tags.split(",").map((tag) => tag.trim().toLowerCase()),
+      tags: tags.split(",").map((tag) => tag.trim().toLowerCase()), // Ensures tags are lowercase
     };
-    updateNote(updatedNote);
+    addNote(newNote);
     saveNotes();
+
     router.back();
   };
 
