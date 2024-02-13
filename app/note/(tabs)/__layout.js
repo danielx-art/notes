@@ -2,12 +2,13 @@ import { Tabs } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
 
 export default function TabsLayout() {
-  const { id } = useLocalSearchParams();
 
+  const { id } = useLocalSearchParams();
+  
   return (
-    <Tabs screenOptions={{ headerShown: true }}>
+    <Tabs>
       <Tabs.Screen
-        name="edit/[id]"
+        name="/edit/[id]"
         options={{
           tabBarLabel: "edit",
           title: "edit",
@@ -20,7 +21,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="view/[id]"
+        name="/view/[id]"
         options={{
           tabBarLabel: "view",
           title: "view",
