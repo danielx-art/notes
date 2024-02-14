@@ -2,9 +2,8 @@ import { Tabs } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
 
 export default function TabsLayout() {
-
   const { id } = useLocalSearchParams();
-  
+
   return (
     <Tabs>
       <Tabs.Screen
@@ -13,7 +12,7 @@ export default function TabsLayout() {
           tabBarLabel: "edit",
           title: "edit",
           href: {
-            pathname: "/edit/[id]",
+            pathname: `/edit/${id}`,
             params: {
               id: id,
             },
@@ -26,7 +25,7 @@ export default function TabsLayout() {
           tabBarLabel: "view",
           title: "view",
           href: {
-            pathname: "/view/[id]",
+            pathname: `/view/${id}`,
             params: {
               id: id,
             },

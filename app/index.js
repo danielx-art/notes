@@ -1,47 +1,107 @@
-import { StyleSheet, View, FlatList } from 'react-native';
-import NoteCard from '../components/NoteCard';
-import AddNoteBtn from '../components/AddNoteBtn';
-import useStore from '../hooks/useStore'
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Dimensions,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import NoteCard from "../components/NoteCard";
+import AddNoteBtn from "../components/AddNoteBtnAnimated";
+import SearchBar from "../components/SearchBar";
+import NotFound from "../components/NotFound";
+import useStore from "../hooks/useStore";
+import { useCallback, useEffect, useState } from "react";
+const { width } = Dimensions.get("window");
+
+const sortNotes = (arr) =>
+  arr.sort((a, b) => {
+    const an = parseInt(a.lastModified);
+    const bn = parseInt(b.lastModified);
+    if (an < bn) return 1;
+    if (an == bn) return 0;
+    if (an > bn) return -1;
+  });
 
 export default function Home() {
-  const notes = useStore(state => state.notes);
+  const allNotes = useStore((state) => state.notes);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [resultNotFound, setResultNotFound] = useState(false);
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    setNotes(sortNotes(allNotes));
+  }, [allNotes]);
+
+  const handleOnSearchInput = (text) => {
+    setSearchQuery(text);
+    if (text.trim().length <= 0) {
+      setNotes(sortNotes(allNotes));
+      setResultNotFound(false);
+      return;
+    }
+
+    const filteredNotes = notes.filter((note) => {
+      if (note.title.toLowerCase().includes(text.toLowerCase())) {
+        return note;
+      }
+    });
+
+    if (filteredNotes.length) {
+      setNotes([...filteredNotes]);
+      setResultNotFound(false);
+    } else {
+      setResultNotFound(true);
+    }
+  };
+
+  const handleOnClear = () => {
+    setSearchQuery("");
+    setResultNotFound(false);
+  };
+
+  const renderItem = useCallback(({ item }) => <NoteCard id={item.id} />, []);
 
   return (
-    <View style={styles.homePage}>
-      <FlatList
-        data={notes}
-        numColumns={2}
-        keyExtractor={(note) => note.id}
-        renderItem={({ item }) => (
-          <NoteCard id={item.id} />
-        )}
-        style={styles.flatList}
-        columnWrapperStyle={styles.columnWrapper}
-        contentContainerStyle={styles.contentContainer}
-      />
+    <>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          {notes.length ? (
+            <SearchBar
+              value={searchQuery}
+              onChangeText={handleOnSearchInput}
+              containerStyle={{ marginTop: 10, padding: 15 }}
+              onClear={handleOnClear}
+            />
+          ) : null}
+
+          {resultNotFound ? (
+            <NotFound />
+          ) : (
+            <FlatList
+              data={notes}
+              numColumns={2}
+              keyExtractor={(note) => note.id}
+              renderItem={renderItem}
+              style={styles.flatList}
+              columnWrapperStyle={{ justifyContent: "space-between" }}
+            />
+          )}
+        </View>
+      </TouchableWithoutFeedback>
       <AddNoteBtn />
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  homePage: {
+  container: {
     flex: 1,
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: width,
   },
   flatList: {
-    width: '100%',
+    //width: width,
     padding: 4,
-    paddingTop: 50,
+    paddingTop: 0,
   },
-  columnWrapper: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  contentContainer: {
-
-  },
-  
 });

@@ -10,8 +10,7 @@ import useStore from "../hooks/useStore";
 import { useEffect } from "react";
 
 export default function RootLayout() {
-
-  const loadNotes = useStore(state => state.loadNotes);
+  const loadNotes = useStore((state) => state.loadNotes);
 
   useEffect(() => {
     loadNotes();
@@ -32,7 +31,7 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    height: "100%",
+    //height: "100%",
     backgroundColor: "rgb(51,52,53)",
     alignItems: "center",
     justifyContent: "center",

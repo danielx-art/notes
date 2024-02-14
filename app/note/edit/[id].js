@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
-import useStore from "../../../../hooks/useStore";
-import HomeBtn from "../../../../components/HomeBtn";
+import useStore from "../../../hooks/useStore";
+import HomeBtn from "../../../components/HomeBtn";
 
 export default function NoteEditScreen() {
   const { id } = useLocalSearchParams();

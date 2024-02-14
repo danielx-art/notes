@@ -1,8 +1,12 @@
 const layoutConfigs = {
-    theme: 'dark',
-    AddNoteBtnPosition: ['auto', 'auto', 100, 'auto'],
-    AddNoteBtnBackgroundColor: 'rgb(31,31,31)',
-    AddNoteBtnSize: 100,
-}
+  theme: "dark",
+  AddNoteBtn: {
+    position: ["auto", "auto", 70, "auto"],
+    backgroundColor: "rgb(31,31,31)",
+    size: 80,
+    secondaryPosition: ["auto", 15, 15, "auto"],
+    secondarySize: 50,
+  },
+};
 
-export default layoutConfigs
+export default layoutConfigs;
