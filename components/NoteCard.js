@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   link: {
+    flex: 1,
     backgroundColor: "rgb(41,42,43)",
     paddingTop: 5,
     paddingRight: 5,
