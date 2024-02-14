@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput } from "react-native";
 export default function SearchBar({
   containerStyle,
   value,
-  onClear,
+  onSubmit,
   onChangeText,
 }) {
   return (
@@ -11,6 +11,7 @@ export default function SearchBar({
       <TextInput
         value={value}
         onChangeText={onChangeText}
+        onSubmitEditing={onSubmit}
         style={styles.searchBar}
         placeholder="Search here.."
         placeholderTextColor={"rgba(225, 190, 220, 0.2)"}
@@ -31,9 +32,5 @@ const styles = StyleSheet.create({
   },
   container: {
     justifyContent: "center",
-  },
-  clearIcon: {
-    position: "absolute",
-    right: 10,
   },
 });

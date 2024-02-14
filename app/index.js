@@ -55,7 +55,7 @@ export default function Home() {
     }
   };
 
-  const handleOnClear = () => {
+  const handleSearchSumbmit = () => {
     setSearchQuery("");
     setResultNotFound(false);
   };
@@ -70,8 +70,8 @@ export default function Home() {
             <SearchBar
               value={searchQuery}
               onChangeText={handleOnSearchInput}
-              containerStyle={{ marginTop: 10, padding: 15 }}
-              onClear={handleOnClear}
+              onSubmit={handleSearchSumbmit}
+              containerStyle={{ marginTop: 0, padding: 10 }}
             />
           ) : null}
 
@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     width: width,
   },
   flatList: {
-    //width: width,
     padding: 4,
     paddingTop: 0,
   },

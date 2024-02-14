@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     paddingBottom: 10,
     paddingLeft: 10,
-    //width: "100%",
     borderRadius: 5,
   },
   innerview: {

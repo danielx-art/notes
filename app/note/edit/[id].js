@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
 import useStore from "../../../hooks/useStore";
 import HomeBtn from "../../../components/HomeBtn";
+import AwareTextInput from "../../../components/AwareTextInput";
 
 export default function NoteEditScreen() {
   const { id } = useLocalSearchParams();
@@ -35,7 +36,7 @@ export default function NoteEditScreen() {
         onChangeText={setTitle}
         style={styles.titleInput}
       />
-      <TextInput
+      <AwareTextInput
         placeholder="Tags (comma-separated)"
         placeholderTextColor="rgb(160,160,160)"
         value={tags}
@@ -61,25 +62,31 @@ export default function NoteEditScreen() {
 const styles = StyleSheet.create({
   newNotePage: {
     flex: 1,
-    position: "relative",
     width: "100%",
-    padding: 16,
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+    marginTop: 0,
+    paddingTop: 0,
+    gap: 5,
   },
   titleInput: {
     fontSize: 20,
-    marginBottom: 8,
     color: "rgb(255,255,255)",
+    // borderBottomWidth: 0.5,
+    // borderColor: "rgba(225,190,220, 0.1)",
   },
   contentInput: {
     flex: 1,
     fontSize: 16,
     textAlignVertical: "top",
-    marginBottom: 8,
     color: "rgb(255,255,255)",
   },
   tagsInput: {
     fontSize: 16,
-    marginBottom: 8,
-    color: "rgb(255,255,255)",
+    color: "rgba(225,190,220, 0.4)",
+    backgroundColor: "rgba(0,0,0,0.1)",
+    padding: 1,
+    paddingHorizontal: 10,
+    borderRadius: 50,
   },
 });
